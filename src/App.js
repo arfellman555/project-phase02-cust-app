@@ -16,10 +16,13 @@ export function App(params) {
     log("in getCustomers()");
     setCustomers(getAll());
   }
-
   const handleListClick = function(item){
     log("in handleListClick()");
-    setFormObject(item);
+    if (item.id === formObject.id) {
+      setFormObject(blankCustomer);
+    } else {
+      setFormObject(item);
+    }
   }  
 
   const handleInputChange = function (event) {
