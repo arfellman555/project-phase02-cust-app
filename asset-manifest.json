@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/arfellman555/project-phase02-cust-app.git/static/css/main.1c9b3e01.css",
+    "main.js": "/arfellman555/project-phase02-cust-app.git/static/js/main.5117860b.js",
+    "index.html": "/arfellman555/project-phase02-cust-app.git/index.html",
+    "main.1c9b3e01.css.map": "/arfellman555/project-phase02-cust-app.git/static/css/main.1c9b3e01.css.map",
+    "main.5117860b.js.map": "/arfellman555/project-phase02-cust-app.git/static/js/main.5117860b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c9b3e01.css",
+    "static/js/main.5117860b.js"
+  ]
+}
