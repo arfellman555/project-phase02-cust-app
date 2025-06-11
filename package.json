@@ -1,7 +1,7 @@
 {
   "name": "phase02-cust-app",
   "version": "0.1.0",
-  "homepage": "https://github.com/arfellman555/project-phase02-cust-app.git",
+  "homepage": "https://arfellman555.github.io/project-phase02-cust-app",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
