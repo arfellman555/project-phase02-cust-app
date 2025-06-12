@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAll, post, put, deleteById } from './restdb.js'
+import { getAll, post, put, deleteById } from './memdb.js'
 import './App.css';
 import CustomerList from './components/CustomerList';
 import CustomerAddUpdateForm from './components/CustomerAddUpdateForm';
@@ -13,17 +13,12 @@ export function App(params) {
   const [formObject, setFormObject] = useState(blankCustomer);
   let mode = (formObject.id >= 0) ? 'Update' : 'Add';
   useEffect(() => { getCustomers() }, []);
-    const getCustomers = async function() {
+  
+  const getCustomers =  function(){
     log("in getCustomers()");
-    try {
-      const data = await getAll();
-      setCustomers(data);
-    } catch (error) {
-      console.error('Failed to fetch customers:', error);
-    }
+    setCustomers(getAll());
   }
-
-  const handleListClick = function(item) {
+  const handleListClick = function(item){
     log("in handleListClick()");
     if (item.id === formObject.id) {
       setFormObject(blankCustomer);
@@ -46,34 +41,23 @@ export function App(params) {
     setFormObject(blankCustomer);
   }
 
-  let onDeleteClick = async function () {
+  let onDeleteClick = function () {
     log("in onDeleteClick()");
     if(formObject.id >= 0){
-      try {
-        await deleteById(formObject.id);
-        await getCustomers(); // Refresh the list after deletion
-        setFormObject(blankCustomer);
-      } catch (error) {
-        console.error('Failed to delete customer:', error);
-      }
-    }
-  }  
-  let onSaveClick = async function () {
+      deleteById(formObject.id);
+    } 
+    setFormObject(blankCustomer);
+  }
+
+  let onSaveClick = function () {
     log("in onSaveClick()");
-    try {
-      if (mode === 'Add') {
-        // Create a new object without the id field for new customers
-        const { id, ...customerWithoutId } = formObject;
-        await post(customerWithoutId);
-      }
-      if (mode === 'Update') {
-        await put(formObject.id, formObject);
-      }
-      await getCustomers(); // Refresh the list after save
-      setFormObject(blankCustomer);
-    } catch (error) {
-      console.error('Failed to save customer:', error);
+    if (mode === 'Add') {
+      post(formObject);
     }
+    if (mode === 'Update') {
+      put(formObject.id, formObject);
+    }
+    setFormObject(blankCustomer);
   }
   return (
     <div>
@@ -95,4 +79,3 @@ export function App(params) {
 }
 
 export default App;
-
